@@ -1,0 +1,1 @@
+Basic web scraping project using BeautifulSoup which checks a table on my university's website every half hour and gives me the published data for the courses I am interested in which are coded as "constant" python lists.
