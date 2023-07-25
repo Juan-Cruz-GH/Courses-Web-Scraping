@@ -5,22 +5,20 @@ import os
 import time
 from datetime import datetime
 
-COURSES_2023_1ST_SEMESTER = [
-    "Ingeniería de Software 2",
-    "Aspectos Legales y Profesionales de Informática",
+COURSES_2023_2ND_SEMESTER = [
+    "Redes y Comunicaciones",
+    "Programación Concurrente",
+    "Computabilidad y Complejidad",
+    "Laboratorio de Software",
+    "Lógica e Inteligencia Artificial",
+    "Matemática 4",
 ]
 
-ELECTIVES_2023_1ST_SEMESTER = [
-    "Aspectos Éticos, Sociales y Profesionales Avanzados de Informática",
-    "Desarrollo Seguro de Aplicaciones",
-    "Internet de las Cosas",
-    "Introducción a Blockchain, Criptomonedas y Smart Contracts",
-    "Java y Aplicaciones Avanzadas sobre Internet",
-    "Minería de Datos Utilizando Sistemas Inteligentes",
-    "Web Semántica y Grafos de Conocimiento",
+ELECTIVES_2023_2ND_SEMESTER = [
+
 ]
 
-ALL_COURSES_2023 = COURSES_2023_1ST_SEMESTER + ELECTIVES_2023_1ST_SEMESTER
+ALL_COURSES_2023 = COURSES_2023_2ND_SEMESTER + ELECTIVES_2023_2ND_SEMESTER
 
 
 def find_rows_with_course(tag):
@@ -70,8 +68,8 @@ def main():
         ]
         os.system("cls" if os.name == "nt" else "clear")
 
-        print("Fecha límite de inscripciones a asignaturas: 5/3")
-        print("Fecha límite de inscripciones a redictados: 28/2")
+        print("Fecha límite de inscripciones a asignaturas: 13/8")
+        print("Fecha límite de inscripciones a redictados: 10/8")
         print_data_courses(data_courses_2023)
 
         time.sleep(SECONDS)
