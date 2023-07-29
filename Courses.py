@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 from requests import get
 from json import dumps
-import os
 import time
 from datetime import datetime
+from tabulate import tabulate
 
 COURSES_2023_2ND_SEMESTER = [
     "Redes y Comunicaciones",
@@ -53,6 +53,14 @@ def print_data_courses(data_courses):
         print(dumps(course, indent=2, ensure_ascii=False))
 
 
+def make_markdown_table(data_courses):
+    headers = data_courses[0].keys()
+    rows = [list(course.values()) for course in data_courses]
+    markdown_table = tabulate(rows, headers=headers, tablefmt="pipe")
+    with open("table.md", "w", encoding="utf-8") as file:
+        file.write(markdown_table)
+
+
 def main():
     SECONDS = 1800
     while True:
@@ -66,13 +74,11 @@ def main():
         data_courses_2023 = [
             dict for dict in data_courses if "2023" in dict["Ultimo Update"]
         ]
-        os.system("cls" if os.name == "nt" else "clear")
-
-        print("Fecha límite de inscripciones a asignaturas: 13/8")
-        print("Fecha límite de inscripciones a redictados: 10/8")
-        print_data_courses(data_courses_2023)
-
+        make_markdown_table(data_courses_2023)
         time.sleep(SECONDS)
-
+        """
+            Fecha límite de inscripciones a asignaturas: 13/8
+            Fecha límite de inscripciones a redictados: 10/8
+        """
 
 main()
