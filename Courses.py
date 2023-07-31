@@ -1,30 +1,22 @@
 from bs4 import BeautifulSoup
 from requests import get
-from json import dumps
 import time
-from datetime import datetime
 from tabulate import tabulate
 
-COURSES_2023_2ND_SEMESTER = [
-    "Redes y Comunicaciones",
-    "Programación Concurrente",
-    "Computabilidad y Complejidad",
-    "Laboratorio de Software",
-    "Lógica e Inteligencia Artificial",
-    "Matemática 4",
-]
 
-ELECTIVES_2023_2ND_SEMESTER = [
-
-]
-
-ALL_COURSES_2023 = COURSES_2023_2ND_SEMESTER + ELECTIVES_2023_2ND_SEMESTER
+def read_courses():
+    courses = []
+    with open('courses.txt', encoding="utf-8") as file:
+        for line in file:
+            courses.append(line.strip())
+    return courses
 
 
 def find_rows_with_course(tag):
+    courses = read_courses()
     if tag.name == "tr":
         first_table_cell = tag.find("td")
-        if (first_table_cell) and (first_table_cell.text in ALL_COURSES_2023):
+        if (first_table_cell) and (first_table_cell.text in courses):
             return True
     return False
 
@@ -44,13 +36,6 @@ def get_data_courses(course_rows):
         course["Ultimo Update"] = remove_whitespace(cells_row[4].text)
         data_courses.append(course)
     return data_courses
-
-
-def print_data_courses(data_courses):
-    print("\n")
-    print(datetime.now().strftime("%H:%M:%S"))
-    for course in data_courses:
-        print(dumps(course, indent=2, ensure_ascii=False))
 
 
 def make_markdown_table(data_courses):
