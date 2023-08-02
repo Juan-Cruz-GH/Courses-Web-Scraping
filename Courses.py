@@ -56,10 +56,7 @@ def main():
         soup = BeautifulSoup(courses_html.text, "html.parser")
         course_rows = soup.find_all(find_rows_with_course)
         data_courses = get_data_courses(course_rows)
-        data_courses_2023 = [
-            dict for dict in data_courses if "2023" in dict["Ultimo Update"]
-        ]
-        make_markdown_table(data_courses_2023)
+        make_markdown_table(data_courses)
         time.sleep(SECONDS)
         """
             Fecha límite de inscripciones a asignaturas: 13/8
