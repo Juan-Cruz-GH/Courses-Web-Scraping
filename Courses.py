@@ -42,12 +42,12 @@ def make_markdown_table(data_courses):
     headers = data_courses[0].keys()
     rows = [list(course.values()) for course in data_courses]
     markdown_table = tabulate(rows, headers=headers, tablefmt="pipe")
-    with open("table.md", "w", encoding="utf-8") as file:
+    with open("courses.md", "w", encoding="utf-8") as file:
         file.write(markdown_table)
 
 
 def main():
-    SECONDS = 1800
+    SECONDS = 8
     while True:
         courses_html = get(
             "https://gestiondocente.info.unlp.edu.ar/cursadas/", verify=False
