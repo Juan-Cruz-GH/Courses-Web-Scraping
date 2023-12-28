@@ -1,1 +1,1 @@
-Basic web scraping project using BeautifulSoup which checks a table on my university's website every half hour and gives me the published data for the courses I am interested in which are coded as "constant" python lists.
+Basic web scraping project using the BeautifulSoup module that checks an HTML table on my university's website and creates a markdown table showing the data for the courses I am interested in. These courses' names are originally loaded from a .txt.
