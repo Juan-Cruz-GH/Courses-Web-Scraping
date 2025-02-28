@@ -9,15 +9,12 @@ DATE_TIME_FORMAT = "%d/%m/%Y %H:%M"
 
 
 def read_courses():
-    courses = []
     with open("courses.txt", encoding="utf-8") as file:
-        for line in file:
-            courses.append(line.strip())
-    return courses
+        return file.readlines()
 
 
 def find_rows_with_course(tag):
-    courses = read_courses()
+    courses = [course.strip() for course in read_courses()]
     if tag.name == "tr":
         first_table_cell = tag.find("td")
         if (first_table_cell) and (first_table_cell.text in courses):
@@ -68,10 +65,7 @@ def main():
         data_courses = get_data_courses(course_rows)
         make_markdown_table(data_courses)
         time.sleep(SECONDS)
-        """
-            Fecha límite de inscripciones a asignaturas: 13/8
-            Fecha límite de inscripciones a redictados: 10/8
-        """
 
 
-main()
+if __name__ == "__main__":
+    main()
