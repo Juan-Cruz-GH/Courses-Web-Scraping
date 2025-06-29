@@ -1,15 +1,18 @@
-from bs4 import BeautifulSoup
-from requests import get
 import time
 from datetime import datetime
+from pathlib import Path
+
+from bs4 import BeautifulSoup
+from requests import get
 from tabulate import tabulate
 
-
 DATE_TIME_FORMAT = "%d/%m/%Y %H:%M"
+SECONDS = 3
+URL = "https://gestiondocente.info.unlp.edu.ar/cursadas/"
 
 
 def read_courses():
-    with open("courses.txt", encoding="utf-8") as file:
+    with Path("courses.txt").open(encoding="utf-8") as file:
         return file.readlines()
 
 
@@ -49,17 +52,13 @@ def make_markdown_table(data_courses):
     headers = data_courses[0].keys()
     rows = [list(course.values()) for course in data_courses]
     markdown_table = tabulate(rows, headers=headers, tablefmt="pipe")
-    with open("courses.md", "w", encoding="utf-8") as file:
+    with Path("courses.md").open("w", encoding="utf-8") as file:
         file.write(markdown_table)
 
 
 def main():
-    SECONDS = 8
     while True:
-        courses_html = get(
-            "https://gestiondocente.info.unlp.edu.ar/cursadas/", verify=False
-        )
-
+        courses_html = get(url=URL, timeout=5)
         soup = BeautifulSoup(courses_html.text, "html.parser")
         course_rows = soup.find_all(find_rows_with_course)
         data_courses = get_data_courses(course_rows)
